@@ -1,0 +1,20 @@
+import java.util.Properties;
+import java.io.InputStream;
+import com.boomi.execution.ExecutionUtil;
+
+for( int i = 0; i < dataContext.getDataCount(); i++ ) 
+{
+	InputStream is = dataContext.getStream(i);
+	Properties props = dataContext.getProperties(i);
+	propValue = props.getProperty("document.dynamic.userdefined.ddp_LastLine");
+	
+	//propValue = "Hello Guys";
+	def lines=is.readLines();
+	def lastline=lines.get(lines.size()-1);
+	
+	//String[] str = propValue
+	
+	props.setProperty("document.dynamic.userdefined.ddp_LastLine", lastline);
+	
+	dataContext.storeStream(is, props);
+}
